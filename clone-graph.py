@@ -25,18 +25,37 @@ class Solution(object):
         :rtype: Node
         """
 
-def log_nodes(n, node_list, r):
-    
-    print("checking node " , n.val)
+def log_nodes(n, node_list):
+    # print("checking node " , n.val)
     if n not in node_list:
         node_list.append(n) 
-        print('current nodelist: ', node_list)
+        # print('current nodelist: ', node_list)
     else:
         return node_list
     
     for node in n.neighbors:
-        print("throw into recursion node ", node.val)
+        # print("throw into recursion node ", node.val)
         log_nodes(node, node_list)
+        
+def clone_nodes(n, node_list, r):
+    print("Im here")
+    print("Checking ", n.val)
+    if n not in node_list:
+        node_list.append(n) 
+        r = n
+        
+        print("Neighbors: ")
+        print(n.neighbors)
+        print(r.neighbors)
+        # for node in n.neighbors:
+            
+        #     r.neighbors.append(node)
+    else:
+        return node_list
+    
+    for node in n.neighbors:
+        # print("throw into recursion node ", node.val)
+        clone_nodes(node, node_list, r)
          
 
 # Input graph
@@ -64,11 +83,32 @@ print("[LOG] Log nodes: \n")
 
 nodes = []
 
-result = Node()
 
-log_nodes(input[0], nodes, result)
+log_nodes(input[0], nodes)
 
 print(nodes)
 
 for node in nodes:
     print(node.val, ' | neighbors: ', node.neighbors[0].val, node.neighbors[1].val)   
+    
+    
+result = Node()
+
+nodes = []
+
+clone_nodes(input[0], nodes, result)
+
+print(nodes)
+print(result)
+print(result.neighbors)
+
+log_nodes(result, nodes)
+
+# print("Show results: ")
+
+# print(nodes)
+
+# for node in nodes:
+#     print(node, node.neighbors)
+    # print(node.val, ' | neighbors: ', node.neighbors[0].val, node.neighbors[1].val)   
+    
