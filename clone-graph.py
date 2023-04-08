@@ -11,7 +11,6 @@ Given a reference of a node in a connected undirected graph. Return a deep copy 
 Each node in the graph contains a value (int) and a list (List[Node]) of its neighbors.
 
 """
-import itertools
 
 # Definition for a Node.
 class Node(object):
@@ -25,11 +24,24 @@ class Solution(object):
         :type node: Node
         :rtype: Node
         """
-        
-for i in itertools.count(0, 1):
-    print(i)
-    
-    if i >= 3:
+
+# Input graph
+input = []
+
+# Write input graph
+length = 4
+for i in range(1, length + 1):
+    n = Node(i)
+    input.append(n)
+    if i >= length + 1:
         break
+
+# Create neighbors lists
+input[0].neighbors = [ input[1] , input[3] ]
+input[1].neighbors = [ input[0] , input[2] ]
+input[2].neighbors = [ input[1] , input[3] ]
+input[3].neighbors = [ input[0] , input[2] ]
     
-n1 = Node(1)        
+# Display input graph
+for node in input:
+    print(node.val, ' | neighbors: ', node.neighbors[0].val, node.neighbors[1].val)       
