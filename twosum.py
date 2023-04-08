@@ -5,19 +5,16 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        result = []
-
-        for i, x in enumerate(nums):
-            if (target - x) in nums:
-                result.append(i)
-                result.append(nums.index(target - x))
-                return result
+        for i in range(0, len(nums)):
+            _tmp = target - nums[i]
+            if _tmp in nums[i + 1:]:
+                return [ i , nums[i + 1:].index(_tmp) + i + 1]
 
 
 solution = Solution()
 
-nums = [2, 9, 11, 3, 5, 6, 7]
-target = 15
+nums = [2,7,11,15]
+target = 9
 
 result = solution.twoSum(nums, target)
 
