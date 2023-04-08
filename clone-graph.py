@@ -24,91 +24,56 @@ class Solution(object):
         :type node: Node
         :rtype: Node
         """
-
-def log_nodes(n, node_list):
-    # print("checking node " , n.val)
-    if n not in node_list:
-        node_list.append(n) 
-        # print('current nodelist: ', node_list)
-    else:
-        return node_list
-    
-    for node in n.neighbors:
-        # print("throw into recursion node ", node.val)
-        log_nodes(node, node_list)
+        checked = {} 
         
-def clone_nodes(n, node_list, r):
-    print("Im here")
-    print("Checking ", n.val)
-    if n not in node_list:
-        node_list.append(n) 
-        r = n
+        def clone(n):
+            # print("Cloning node ", n.val)
+            # print("Current checked: ", checked.keys())
+            if n in checked:
+                # print("Already exists, out")
+                return checked[n]
+            else:
+                
+                result = Node(n.val)
+                checked[n] = result
+                
+                for neighbor in n.neighbors:
+                    result.neighbors.append(clone(neighbor))
+                    
+            return result 
         
-        print("Neighbors: ")
-        print(n.neighbors)
-        print(r.neighbors)
-        # for node in n.neighbors:
-            
-        #     r.neighbors.append(node)
-    else:
-        return node_list
+        return clone(node)
     
-    for node in n.neighbors:
-        # print("throw into recursion node ", node.val)
-        clone_nodes(node, node_list, r)
-         
+def print_graph(n):
+    checked = []
+    
+    def recursive(n):
+        if n not in checked:
+            print(n.val, end='| neighbors: ')
+            for node in n.neighbors:
+                print(node.val, end=';  ')
+            print('')
+                
+            checked.append(n)
+        else:
+            return
+        for node in n.neighbors:
+            recursive(node)
+    
+    recursive(n)
 
-# Input graph
-input = []
-
-# Write input graph
-length = 4
-for i in range(1, length + 1):
-    n = Node(i)
-    input.append(n)
-    if i >= length + 1:
-        break
-
-# Create neighbors lists
+# Input graph and create neighbors lists
+input = [Node(1), Node(2), Node(3), Node(4)]
 input[0].neighbors = [ input[1] , input[3] ]
 input[1].neighbors = [ input[0] , input[2] ]
 input[2].neighbors = [ input[1] , input[3] ]
 input[3].neighbors = [ input[0] , input[2] ]
-    
-# Display input graph
-for node in input:
-    print(node.val, ' | neighbors: ', node.neighbors[0].val, node.neighbors[1].val)       
-    
-print("[LOG] Log nodes: \n")
 
-nodes = []
+sol = Solution()
+output = sol.cloneGraph(input[0])
+# print(sol.cloneGraph(input[0]))
 
+print_graph(input[0])
 
-log_nodes(input[0], nodes)
-
-print(nodes)
-
-for node in nodes:
-    print(node.val, ' | neighbors: ', node.neighbors[0].val, node.neighbors[1].val)   
-    
-    
-result = Node()
-
-nodes = []
-
-clone_nodes(input[0], nodes, result)
-
-print(nodes)
-print(result)
-print(result.neighbors)
-
-log_nodes(result, nodes)
-
-# print("Show results: ")
-
-# print(nodes)
-
-# for node in nodes:
-#     print(node, node.neighbors)
-    # print(node.val, ' | neighbors: ', node.neighbors[0].val, node.neighbors[1].val)   
-    
+print("RESULT:\n")
+print_graph(output)
