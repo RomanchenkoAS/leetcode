@@ -25,6 +25,20 @@ class Solution(object):
         :rtype: Node
         """
 
+def log_nodes(n, node_list, r):
+    
+    print("checking node " , n.val)
+    if n not in node_list:
+        node_list.append(n) 
+        print('current nodelist: ', node_list)
+    else:
+        return node_list
+    
+    for node in n.neighbors:
+        print("throw into recursion node ", node.val)
+        log_nodes(node, node_list)
+         
+
 # Input graph
 input = []
 
@@ -45,3 +59,16 @@ input[3].neighbors = [ input[0] , input[2] ]
 # Display input graph
 for node in input:
     print(node.val, ' | neighbors: ', node.neighbors[0].val, node.neighbors[1].val)       
+    
+print("[LOG] Log nodes: \n")
+
+nodes = []
+
+result = Node()
+
+log_nodes(input[0], nodes, result)
+
+print(nodes)
+
+for node in nodes:
+    print(node.val, ' | neighbors: ', node.neighbors[0].val, node.neighbors[1].val)   
