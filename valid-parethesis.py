@@ -23,14 +23,8 @@ class Solution(object):
                 except IndexError:
                     return False
                 
-                if ((l_char == '[' and char == ']') or (l_char == '{' and char == '}') or (l_char == '(' and char == ')')):
-                    continue
-                else:
-                    # String is invalid
+                if not ((l_char == '[' and char == ']') or (l_char == '{' and char == '}') or (l_char == '(' and char == ')')):
                     return False
-            else:
-                # Input is incorrect
-                return False
             
         # Return True if array is empty and False otherwise
         return not bool(opened)
