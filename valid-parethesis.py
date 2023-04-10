@@ -15,14 +15,15 @@ class Solution(object):
         opened = []
         
         for char in s:
-            print(char)
-            
             if char in '[{(':
                 opened += char
             elif (char in ']})'):
-                l_char = opened.pop()
+                try:
+                    l_char = opened.pop()
+                except IndexError:
+                    return False
                 
-                if ((l_char == '[' and char == ']') or (l_char == '{' and char == '}') or (l_char == '(' and l_char == ')')):
+                if ((l_char == '[' and char == ']') or (l_char == '{' and char == '}') or (l_char == '(' and char == ')')):
                     continue
                 else:
                     # String is invalid
@@ -30,11 +31,13 @@ class Solution(object):
             else:
                 # Input is incorrect
                 return False
-        return True
+            
+        # Return True if array is empty and False otherwise
+        return not bool(opened)
                 
         
 solution = Solution()
-s = "([])"
+s = "]"
 
 a = solution.isValid(s)
 
