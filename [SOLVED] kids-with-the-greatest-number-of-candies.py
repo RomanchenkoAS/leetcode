@@ -16,16 +16,16 @@ class Solution(object):
         maximum = max(candies)
 
         # This is way too smart and therefore slower ;)
-        # return [True if i + extraCandies >= maximum else False for i in candies] 
-        
+        # return [True if i + extraCandies >= maximum else False for i in candies]
+
         for index, amount in enumerate(candies):
             if amount + extraCandies >= maximum:
-    
                 candies[index] = True
             else:
                 candies[index] = False
-    
+
         return candies
+
 
 sol = Solution()
 
