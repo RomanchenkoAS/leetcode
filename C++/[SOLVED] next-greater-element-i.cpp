@@ -16,34 +16,26 @@ class Solution
 public:
     vector<int> nextGreaterElement(vector<int> &nums1, vector<int> &nums2)
     {
-        int output = 0;
-
         size_t l = nums2.size();
-
-        // cout << "Size: " << l << endl;
 
         int subs = 0;
 
-        for (int i = 0; i < nums1.size(); i++)
+        for (short i = 0; i < nums1.size(); i++)
         {
-
-            cout << "Current i : " << nums1[i] << " ";
             // Recieve iterator pointing at the element i
             auto ind = std::find(nums2.begin(), nums2.end(), nums1[i]);
 
             // Find position of i, calculating distance between 0 and i
-            int i0 = std::distance(nums2.begin(), ind);
+            short i0 = std::distance(nums2.begin(), ind);
 
-            cout << "|| i position in nums2 : " << i0 << endl;
+            subs = nums1[i];
 
-            subs = i;
-
-            for (int j = i0 + 1; j < l; j++)
+            for (short j = i0 + 1; j < l; j++)
             {
-                // cout << "Comparin"
                 if (nums2[j] > nums1[i])
                 {
                     subs = nums2[j];
+                    break;
                 }
             }
             if (subs == nums1[i])
