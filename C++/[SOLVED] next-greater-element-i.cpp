@@ -16,8 +16,10 @@ class Solution
 public:
     vector<int> nextGreaterElement(vector<int> &nums1, vector<int> &nums2)
     {
+        // Length of the vector nums2
         size_t l = nums2.size();
 
+        // Substitution
         int subs = 0;
 
         for (short i = 0; i < nums1.size(); i++)
@@ -28,20 +30,26 @@ public:
             // Find position of i, calculating distance between 0 and i
             short i0 = std::distance(nums2.begin(), ind);
 
+            // Initialize substitution with actual value of i'th element
             subs = nums1[i];
 
             for (short j = i0 + 1; j < l; j++)
             {
                 if (nums2[j] > nums1[i])
                 {
+                    // If the number to the right is bigger than i'th, make a substitution
                     subs = nums2[j];
                     break;
                 }
             }
+
+            // If the substitution was not made, make it equal to -1
             if (subs == nums1[i])
             {
                 subs = -1;
             }
+
+            // Substitute
             nums1[i] = subs;
         }
 
