@@ -14,7 +14,7 @@ using namespace std;
 class Solution
 {
 public:
-    vector<int> nextGreaterElement(vector<int> &nums1, vector<int> &nums2)
+    vector<int> & nextGreaterElement(vector<int> &nums1, vector<int> &nums2)
     {
         // Length of the vector nums2
         size_t l = nums2.size();
