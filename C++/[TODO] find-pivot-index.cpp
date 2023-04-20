@@ -18,38 +18,21 @@ public:
 
         size_t s = nums.size();
 
-        int rightsum[s], leftsum[s];
+        vector<int> rightsum = {0};
+        int leftsum = 0;
 
-        // Calculate rightsum vector
-        for (int i = (s - 2); i >= 0; i--)
+        // Calculate rightsum array
+        for (int i = (s - 1); i >= 0; i--)
         {
-            cout << "i = " << i << ": " << nums[i] << " ";
-            rightsum[i] = (nums[i] + rightsum[i + 1]);
+            rightsum.push_back(nums[i] + rightsum[s - i - 1]);
         }
 
-        cout << endl;
-
-        for (int i : rightsum) {
-            cout << i << " " ;
+        for (int i = 0; i < s; i++)
+        {
+            leftsum = leftsum + nums[i - 1];
+            if (leftsum == rightsum[s - i - 1])
+                return i;
         }
-
-        cout << endl;
-
-        // for (int i = 0; i < s; i++) {
-        //     int leftsum = 0, rightsum = 0;
-
-        //     for (int j = 0; j < i; j++) {
-        //         leftsum += nums[j];
-        //     }
-
-        //     for (int j = i + 1; j < s; j++) {
-        //         rightsum += nums[j];
-        //     }
-
-        //     if (leftsum == rightsum) {
-        //         return i;
-        //     }
-        // }
 
         return -1;
     }
@@ -59,6 +42,8 @@ int main(void)
 {
 
     vector<int> input = {1, 7, 3, 6, 5, 6};
+    // vector<int> input = {2, 1, -1};
+    // vector<int> input = {};
 
     Solution sol;
 
