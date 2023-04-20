@@ -14,6 +14,25 @@ class Solution {
 public:
     int pivotIndex(vector<int>& nums) {
         
+        size_t s = nums.size();
+
+        for (int i = 0; i < s; i++) {
+            int leftsum = 0, rightsum = 0;
+
+            for (int j = 0; j < i; j++) {
+                leftsum += nums[j];
+            }
+
+            for (int j = i + 1; j < s; j++) {
+                rightsum += nums[j];
+            }
+
+            if (leftsum == rightsum) {
+                return i;
+            }
+        }
+
+        return -1;
     }
 };
 
