@@ -16,22 +16,21 @@ public:
     int pivotIndex(vector<int> &nums)
     {
 
-        size_t s = nums.size();
-
-        vector<int> rightsum = {0};
-        int leftsum = 0;
+        vector<int> rightsum = {0}, leftsum = {0};
 
         // Calculate rightsum array
-        for (int i = (s - 1); i >= 0; i--)
+        for (int i = 1; i <= nums.size() - 1; i++)
         {
-            rightsum.push_back(nums[i] + rightsum[s - i - 1]);
+            leftsum.push_back(nums[i - 1] + leftsum[i - 1]);
+            rightsum.push_back(nums[nums.size() - i] + rightsum[i - 1]);
         }
 
-        for (int i = 0; i < s; i++)
+        for (int i = 0; i < nums.size(); i++)
         {
-            leftsum = leftsum + nums[i - 1];
-            if (leftsum == rightsum[s - i - 1])
+            if (leftsum[i] == rightsum[nums.size() - 1 - i])
+            {
                 return i;
+            }
         }
 
         return -1;
@@ -42,6 +41,7 @@ int main(void)
 {
 
     vector<int> input = {1, 7, 3, 6, 5, 6};
+    // vector<int> input = {1,2,3};
     // vector<int> input = {2, 1, -1};
     // vector<int> input = {};
 
