@@ -1,7 +1,7 @@
 /* Given an array of integers nums, calculate the pivot index of this array.
-The pivot index is the index where the sum of all the numbers strictly to the left of the index is 
+The pivot index is the index where the sum of all the numbers strictly to the left of the index is
 equal to the sum of all the numbers strictly to the index's right.
-If the index is on the left edge of the array, then the left sum is 0 because there are no elements to the left. 
+If the index is on the left edge of the array, then the left sum is 0 because there are no elements to the left.
 This also applies to the right edge of the array.
 Return the leftmost pivot index. If no such index exists, return -1. */
 
@@ -10,35 +10,55 @@ Return the leftmost pivot index. If no such index exists, return -1. */
 
 using namespace std;
 
-class Solution {
+class Solution
+{
 public:
-    int pivotIndex(vector<int>& nums) {
-        
+    int pivotIndex(vector<int> &nums)
+    {
+
         size_t s = nums.size();
 
-        for (int i = 0; i < s; i++) {
-            int leftsum = 0, rightsum = 0;
+        int rightsum[s], leftsum[s];
 
-            for (int j = 0; j < i; j++) {
-                leftsum += nums[j];
-            }
-
-            for (int j = i + 1; j < s; j++) {
-                rightsum += nums[j];
-            }
-
-            if (leftsum == rightsum) {
-                return i;
-            }
+        // Calculate rightsum vector
+        for (int i = (s - 2); i >= 0; i--)
+        {
+            cout << "i = " << i << ": " << nums[i] << " ";
+            rightsum[i] = (nums[i] + rightsum[i + 1]);
         }
+
+        cout << endl;
+
+        for (int i : rightsum) {
+            cout << i << " " ;
+        }
+
+        cout << endl;
+
+        // for (int i = 0; i < s; i++) {
+        //     int leftsum = 0, rightsum = 0;
+
+        //     for (int j = 0; j < i; j++) {
+        //         leftsum += nums[j];
+        //     }
+
+        //     for (int j = i + 1; j < s; j++) {
+        //         rightsum += nums[j];
+        //     }
+
+        //     if (leftsum == rightsum) {
+        //         return i;
+        //     }
+        // }
 
         return -1;
     }
 };
 
-int main(void) {
+int main(void)
+{
 
-    vector<int> input = {1,7,3,6,5,6};
+    vector<int> input = {1, 7, 3, 6, 5, 6};
 
     Solution sol;
 
