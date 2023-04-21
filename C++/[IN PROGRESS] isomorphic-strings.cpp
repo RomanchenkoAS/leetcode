@@ -17,26 +17,31 @@ public:
     bool isIsomorphic(string s, string t)
     {
         // Different length
-        if (s.length() != t.length()) {
+        if (s.length() != t.length())
+        {
             return false;
         }
         // Empty input
-        if (s.length() == t.length() && s.length() == 0) {
+        if (s.length() == t.length() && s.length() == 0)
+        {
             return true;
         }
 
-        unordered_map<char,char> subs;
+        unordered_map<char, char> subs, subs_back;
 
-        for (int i = 0; i < s.length(); i ++) {
-            if (subs.count(t[i]) == 0) {
-                subs[t[i]] = s[i];
+        for (int i = 0; i < s.length(); i++)
+        {
+            if (subs.count(s[i]) == 0)
+            {
+                subs[s[i]] = t[i];
             }
-            t[i] = subs[t[i]];
+            if (subs_back.count(t[i]) == 0)
+            {
+                subs_back[t[i]] = s[i];
+            }
         }
 
-        cout << "result = " << t << endl;
-        
-        return s == t;
+        return subs.size() == subs_back.size();
     }
 };
 
@@ -44,8 +49,10 @@ int main(void)
 {
     Solution sol;
 
-    string s = "foo";
-    string t = "bar";
+    string s = "paper";
+    string t = "title";
+    // string s = "foo";
+    // string t = "bar";
 
     bool result = sol.isIsomorphic(s, t);
 
