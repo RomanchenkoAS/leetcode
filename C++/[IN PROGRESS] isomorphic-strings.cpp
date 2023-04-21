@@ -6,6 +6,8 @@ order of characters. No two characters may map to the same character, but a char
 #include <iostream>
 #include <vector>
 #include <cstring>
+#include <algorithm>
+#include <unordered_map>
 
 using namespace std;
 
@@ -14,8 +16,27 @@ class Solution
 public:
     bool isIsomorphic(string s, string t)
     {
+        // Different length
+        if (s.length() != t.length()) {
+            return false;
+        }
+        // Empty input
+        if (s.length() == t.length() && s.length() == 0) {
+            return true;
+        }
 
-        return true;
+        unordered_map<char,char> subs;
+
+        for (int i = 0; i < s.length(); i ++) {
+            if (subs.count(t[i]) == 0) {
+                subs[t[i]] = s[i];
+            }
+            t[i] = subs[t[i]];
+        }
+
+        cout << "result = " << t << endl;
+        
+        return s == t;
     }
 };
 
@@ -23,13 +44,13 @@ int main(void)
 {
     Solution sol;
 
-    string s = "egg";
-    string t = "add";
+    string s = "foo";
+    string t = "bar";
 
     bool result = sol.isIsomorphic(s, t);
 
     cout << endl
-         << "reult = " << result << endl;
+         << "result = " << result << endl;
 
     return 0;
 }
