@@ -4,9 +4,6 @@ All occurrences of a character must be replaced with another character while pre
 order of characters. No two characters may map to the same character, but a character may map to itself.*/
 
 #include <iostream>
-#include <vector>
-#include <cstring>
-#include <algorithm>
 #include <unordered_map>
 
 using namespace std;
@@ -27,9 +24,11 @@ public:
             return true;
         }
 
+        short length = s.length();
+
         unordered_map<char, char> subs, subs_back;
 
-        for (int i = 0; i < s.length(); i++)
+        for (int i = 0; i < length; i++)
         {
             if (subs.count(s[i]) == 0)
             {
@@ -41,7 +40,18 @@ public:
             }
         }
 
-        return subs.size() == subs_back.size();
+        string s_copy(length, ' '), t_copy(length, ' ');
+
+        for (int i = 0; i < length; i++)
+        {
+            s_copy[i] = subs[s[i]];
+        }
+        for (int i = 0; i < length; i++)
+        {
+            t_copy[i] = subs_back[t[i]];
+        }
+
+        return s == t_copy && t == s_copy;
     }
 };
 
@@ -53,6 +63,8 @@ int main(void)
     string t = "title";
     // string s = "foo";
     // string t = "bar";
+    // string s = "badc";
+    // string t = "baba";
 
     bool result = sol.isIsomorphic(s, t);
 
