@@ -12,7 +12,7 @@ using namespace std;
 class Solution
 {
 public:
-    bool isSubsequence(string s, string t)
+    bool isIsomorphic(string s, string t)
     {
         if (s == t)
         {
