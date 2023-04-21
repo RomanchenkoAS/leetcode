@@ -1,7 +1,7 @@
-/*Given two strings s and t, determine if they are isomorphic.
-Two strings s and t are isomorphic if the characters in s can be replaced to get t.
-All occurrences of a character must be replaced with another character while preserving the
-order of characters. No two characters may map to the same character, but a character may map to itself.*/
+/*Given two strings s and t, return true if s is a subsequence of t, or false otherwise.
+A subsequence of a string is a new string that is formed from the original string by deleting some 
+(can be none) of the characters without disturbing the relative positions of the remaining characters. 
+(i.e., "ace" is a subsequence of "abcde" while "aec" is not).*/
 
 #include <iostream>
 #include <vector>
@@ -12,7 +12,7 @@ using namespace std;
 class Solution
 {
 public:
-    bool isIsomorphic(string s, string t)
+    bool isSubsequence(string s, string t)
     {
         if (s == t)
         {
@@ -41,7 +41,7 @@ int main(void)
     string s = "ace";
     string t = "abcbedfdwefevd";
 
-    bool result = sol.isIsomorphic(s, t);
+    bool result = sol.isSubsequence(s, t);
 
     cout << endl
          << "reult = " << result << endl;
