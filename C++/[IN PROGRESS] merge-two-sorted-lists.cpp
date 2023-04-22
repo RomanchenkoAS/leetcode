@@ -31,56 +31,64 @@ void dispay_list(ListNode *list)
     }
 }
 
-ListNode *interweave(ListNode * a, ListNode * b)
+ListNode *interweave(ListNode *a, ListNode *b)
 {
-    if (a->val >= b->val)
+    // If both are the same node
+    if (a == b) {
+        return a;
+    }
+
+    // If both elements are last in line
+    // Connect least -> greater and return the least
+    if (a->next == nullptr && b->next == nullptr)
     {
-        // If there is a b.next
-        if (b->next != nullptr)
+        if (a->val <= b->val)
         {
-            ListNode *_tmp = b->next;
-            b->next = a;
-            interweave(_tmp, a);
+            a->next = b;
+            return a;
         }
         else
         {
-            // If there isn't b.next, only a.next
             b->next = a;
-            if (a->next != nullptr)
-            {
-                interweave(a, a->next);
-            }
-            else
-            {
-                return nullptr;
-            }
+            return b;
         }
+    }
+
+    // If one of them is least and last in line
+    if (a->val <= b->val && a->next == nullptr)
+    {
+        a->next = interweave(b, b->next);
+
+        return a;
+    }
+    if (b->val < a->val && b->next == nullptr)
+    {
+        b->next = interweave(a, a->next);
         return b;
+    }
+
+    // If one of them is larger and last in line
+    // if (a->val <= b->val && )
+
+    // If both are not last in line
+    if (a->val <= b->val)
+    {
+        ListNode *a_next = a->next ;
+        // connect the least one to the greater one
+        a->next = interweave(a_next, b);
+        // call interweave on the least->next and the greater
+
+        // return the least
+        return a;
     }
     else
     {
-        // If there is an a.next
-        if (a->next != nullptr)
-        {
-            ListNode *_tmp = a->next;
-            a->next = b;
-            interweave(_tmp, b);
-        }
-        else
-        {
-            // If there isn't b.next, only a.next
-            a->next = b;
-            if (b->next != nullptr)
-            {
-                interweave(b, b->next);
-            }
-            else
-            {
-                return nullptr;
-            }
-        }
-        return a;
+        ListNode *b_next = b->next;
+        b->next = interweave(b_next, a);
+
+        return b;
     }
+
 }
 
 class Solution
@@ -88,13 +96,16 @@ class Solution
 public:
     ListNode *mergeTwoLists(ListNode *list1, ListNode *list2)
     {
-        if (list1 == nullptr && list2 == nullptr) {
+        if (list1 == nullptr && list2 == nullptr)
+        {
             return nullptr;
         }
-        if (list1 == nullptr) {
+        if (list1 == nullptr)
+        {
             return list2;
         }
-        if (list2 == nullptr) {
+        if (list2 == nullptr)
+        {
             return list1;
         }
 
@@ -106,20 +117,31 @@ int main(void)
 {
     Solution sol;
 
-    ListNode a3, a2, a1;
-    a3.val = 4;
-    a3.next = nullptr;
-    a2.val = 2;
-    a2.next = &a3;
-    a1.val = 1;
+    ListNode a2, a1;
+    a2.val = 3;
+    a2.next = nullptr;
+    a1.val = -9;
     a1.next = &a2;
-    ListNode b3, b2, b1;
-    b3.val = 4;
-    b3.next = nullptr;
-    b2.val = 3;
-    b2.next = &b3;
-    b1.val = 1;
+    ListNode b2, b1;
+    b2.val = 7;
+    b2.next = nullptr;
+    b1.val = 5;
     b1.next = &b2;
+
+    // ListNode a3, a2, a1;
+    // a3.val = 4;
+    // a3.next = nullptr;
+    // a2.val = 2;
+    // a2.next = &a3;
+    // a1.val = 1;
+    // a1.next = &a2;
+    // ListNode b3, b2, b1;
+    // b3.val = 4;
+    // b3.next = nullptr;
+    // b2.val = 3;
+    // b2.next = &b3;
+    // b1.val = 1;
+    // b1.next = &b2;
 
     dispay_list(&a1);
     dispay_list(&b1);
