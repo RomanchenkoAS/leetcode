@@ -8,17 +8,32 @@ Return the maximum profit you can achieve from this transaction. If you cannot a
 
 using namespace std;
 
-class Solution {
+class Solution
+{
 public:
-    int maxProfit(vector<int>& prices) {
-        
+    int maxProfit(vector<int> &prices)
+    {
+        int max_profit = 0, min = prices.front();
+        cout << "min = " << min;
+        for (int i : prices) { 
+            if (i < min) {
+                min = i;
+            } else {
+                int current_profit = i - min;
+                if (current_profit > max_profit) {
+                    max_profit = current_profit;
+                }
+            }
+        }
+
+        return max_profit;
     }
 };
 
 int main(void)
 {
 
-    vector<int> input = {1, 7, 3, 6, 5, 6};
+    vector<int> input = {7, 1, 5, 3, 6, 4};
     // vector<int> input = {1,2,3};
     // vector<int> input = {2, 1, -1};
     // vector<int> input = {};
