@@ -64,6 +64,9 @@ class Solution
 public:
     vector<vector<int>> levelOrder(TreeNode *root)
     {
+        if (root == nullptr) {
+            return {{}};
+        }
         vector<vector<int>> result = {{root->val}};
         vector<vector<int>> traversed;
 
@@ -78,14 +81,19 @@ public:
 int main(void)
 {
 
-    TreeNode a, b, c;
+    TreeNode a, b, c, d, e;
 
     b.val = 1;
     c.val = 2;
     a.val = 3;
+    d.val = 4;
+    e.val = 5;
+    
 
     a.left = &b;
     a.right = &c;
+    b.left = &d;
+    c.right = &e;
 
     Solution sol;
 
