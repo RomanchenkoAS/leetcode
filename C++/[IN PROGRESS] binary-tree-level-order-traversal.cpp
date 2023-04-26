@@ -14,65 +14,57 @@ struct TreeNode
 
 #include <vector>
 #include <iostream>
+#include <queue>
 
 using namespace std;
-
-vector<vector<int>> traversal(TreeNode *root)
-{
-    if (root == nullptr)
-    {
-        return {{}};
-    }
-
-    vector<vector<int>> res;
-
-    vector<int> current;
-    if (root->left != nullptr)
-    {
-        current.push_back(root->left->val);
-    }
-    if (root->right != nullptr)
-    {
-        current.push_back(root->right->val);
-    }
-
-    if (!current.empty())
-    {
-        res.push_back(current);
-    }
-
-    vector<vector<int>> left_tree;
-    vector<vector<int>> right_tree;
-
-    if (root->left != nullptr)
-    {
-        left_tree = traversal(root->left);
-        res.insert(res.end(), left_tree.begin(), left_tree.end());
-    }
-
-    if (root->right != nullptr)
-    {
-        right_tree = traversal(root->right);
-        res.insert(res.end(), right_tree.begin(), right_tree.end());
-    }
-
-    return res;
-}
 
 class Solution
 {
 public:
     vector<vector<int>> levelOrder(TreeNode *root)
     {
-        if (root == nullptr) {
-            return {{}};
+        if (!root) {
+            return {};
         }
-        vector<vector<int>> result = {{root->val}};
-        vector<vector<int>> traversed;
 
-        traversed = traversal(root);
+        vector<vector<int>> result;
+        vector<int> output;
+        queue<TreeNode *> q;
 
-        result.insert(result.end(), traversed.begin(), traversed.end());
+        q.push(root);
+        q.push(NULL); // Separator
+
+        while (!q.empty())
+        {
+            // Remove the first item of queue and save it
+            TreeNode *temp = q.front();
+            q.pop();
+
+            if (temp == NULL)
+            {
+                // We have reached end of the level
+                result.push_back(output);
+                output.clear();
+
+                // If queue is not empty, there are still children to be checked
+                // So we add a separator
+                if (!q.empty()) {
+                    q.push(NULL);
+                }
+            }
+            else // temp is not NULL
+            {
+                output.push_back(temp->val);
+
+                // Check the children
+                if (temp->left) {
+                    q.push(temp->left);
+                }
+                if (temp->right) {
+                    q.push(temp->right);
+                }
+            }
+        }
 
         return result;
     }
@@ -81,19 +73,20 @@ public:
 int main(void)
 {
 
-    TreeNode a, b, c, d, e;
+    TreeNode a, b, c, d, e, f;
 
     b.val = 1;
     c.val = 2;
     a.val = 3;
     d.val = 4;
     e.val = 5;
-    
+    f.val = 6;
 
     a.left = &b;
     a.right = &c;
     b.left = &d;
     c.right = &e;
+    c.left = &f;
 
     Solution sol;
 
