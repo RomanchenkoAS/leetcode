@@ -23,7 +23,6 @@ public:
             return (nums[0] == target) ? 0 : -1;
         }
 
-        // size_t size = nums.size();
         int begin = 0, end = nums.size() - 1;
 
         int cursor = (begin + end) / 2;
@@ -48,7 +47,6 @@ public:
                 cursor = (begin + end) / 2;
             }
 
-            // if (begin)
         }
 
         if (nums[end] == target)
