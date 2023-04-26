@@ -18,19 +18,18 @@ public:
         {
             return -1;
         }
-        if (nums.size() == 1) {
+        if (nums.size() == 1)
+        {
             return (nums[0] == target) ? 0 : -1;
         }
 
         // size_t size = nums.size();
-        int begin = 0, end = nums.size();
+        int begin = 0, end = nums.size() - 1;
 
         int cursor = (begin + end) / 2;
 
         while (begin < end - 1)
         {
-
-
             if (nums[cursor] == target)
             {
                 // Found it
@@ -40,11 +39,11 @@ public:
             {
                 if (target > nums[cursor])
                 {
-                    begin = cursor;
+                    begin = cursor + 1;
                 }
                 else
                 {
-                    end = cursor;
+                    end = cursor - 1;
                 }
                 cursor = (begin + end) / 2;
             }
@@ -52,10 +51,12 @@ public:
             // if (begin)
         }
 
-        if (nums[end] == target) {
+        if (nums[end] == target)
+        {
             return end;
         }
-        if (nums[begin] == target) {
+        if (nums[begin] == target)
+        {
             return begin;
         }
 
