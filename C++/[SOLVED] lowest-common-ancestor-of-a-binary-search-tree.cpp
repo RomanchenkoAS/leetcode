@@ -29,6 +29,8 @@ public:
         {
             return nullptr;
         }
+
+        // Recursive approach
         //     // If both p & q are less than root then the answer is lower to the right
         //     if (root->val < p->val && root->val < q->val) {
         //         return lowestCommonAncestor(root->right, p, q);
@@ -40,13 +42,10 @@ public:
         //     // If root is between p and q it is the answer
         //     return root;
 
-        bool less_than_both = (root->val < p->val && root->val < q->val);
-        bool more_than_both = (root->val > p->val && root->val > q->val);
-        while (less_than_both || more_than_both)
+        // Iterative approach
+        while ((root->val < p->val && root->val < q->val) || (root->val > p->val && root->val > q->val))
         {
-            less_than_both = (root->val < p->val && root->val < q->val);
-            more_than_both = (root->val > p->val && root->val > q->val);
-            if (less_than_both) {
+            if (root->val < p->val && root->val < q->val) {
                 root = root->right;
             } else {
                 root = root->left;
