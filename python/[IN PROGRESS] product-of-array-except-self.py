@@ -11,13 +11,25 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
+        def product(array):
+            prod = 1
+            for i in array:
+                prod *= i
+            return prod
+        result = []
+        for i in range(len(nums)):
+            # print(i)
+            # print(nums[0:i])
+            # print(nums[i+1:])
+            result.append(product(nums[0:i])*product(nums[i + 1:]))
+            
         
-        
-        return None
+        return result
     
     
 s = Solution()
 
-input = None
+# input = [-1,1,0,-3,3]
+input = [1,2,3,4]
 
 print(s.productExceptSelf(input))
