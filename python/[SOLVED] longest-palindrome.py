@@ -6,7 +6,7 @@ class Solution(object):
         """
         map = {}
         for char in s:
-            if map[char]:
+            if char in map:
                 map[char] += 1
             else:
                 map[char] = 1
@@ -17,7 +17,7 @@ class Solution(object):
             if map[char] % 2 == 0:
                 length += map[char]
             else:
-                length += (map[char] - 1) / 2
+                length += map[char] - 1
                 if not has_odd:
                     length += 1
                     has_odd = True
@@ -28,8 +28,7 @@ class Solution(object):
     
 s = Solution()
 
-# input = [7,1,5,3,6,4]
-input = [1,4,2]
-# input = [3,2,6,5,0,3]
+# input = "abccccdd"
+input = "ccc"
 
-print(s.maxProfit(input))
+print(s.longestPalindrome(input))
