@@ -10,90 +10,39 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
-
-        # SLIDING WINDOW!!
-
-        # We take first symbol (A) and start to build a string of a same character from it
-        # If next is A we add it to length
-        # If next is B we decrease k (k = k - 1) and add it to length
-        # If next is B and we have no more k, we save current length and start counting a new sliding string from FIRST B
-        # Stop at the last character in a string
-
-        i = 1
-        length = 1
-        length_based = 0
-        current = s[0]
-        k_left = k
-        first_different = None
-
-        while i < len(s):
-            if s[i] == current:
-                length += 1
-            else:
-                # Remember where the first different letter was
-                if not first_different:
-                    first_different = i
-
-                k_left -= 1
-                if k_left >= 0:
-                    length += 1
-                else:
-                    if length > length_based:
-                        length_based = length
-                    length = 1
-                    current = s[first_different]
-                    i = first_different + 1
-                    first_different = None
-                    k_left = k
-                    continue
-            i += 1
-
-        if length > length_based:
-            length_based = length
-
-        l1 = length_based
+        result = 0
+        left, right = 0, 0
         
-        s = s[::-1]
-        i = 1
-        length = 1
-        length_based = 0
-        current = s[0]
-        k_left = k
-        first_different = None
-
-        while i < len(s):
-            if s[i] == current:
-                length += 1
-            else:
-                # Remember where the first different letter was
-                if not first_different:
-                    first_different = i
-
-                k_left -= 1
-                if k_left >= 0:
-                    length += 1
-                else:
-                    if length > length_based:
-                        length_based = length
-                    length = 1
-                    current = s[first_different]
-                    i = first_different + 1
-                    first_different = None
-                    k_left = k
-                    continue
-            i += 1
-
-        if length > length_based:
-            length_based = length
+        # Hold encountered letters and their frequency 
+        letters = {}
+        
+        for right in range(len(s)):
+            letters.setdefault(s[right], 0)
+            letters[s[right]] += 1
             
-        l2 = length_based
-        
-        return max(l1, l2)
-
+            # Get the most frequent letter from the dictionary
+            # most_frequent = sorted(list(letters.items()), reverse=True, key=lambda x: x[1])
+            # most_frequent=most_frequent[0]
+            
+            frequency = max(letters.values())
+            
+            # letter = most_frequent[0]
+            # frequency = most_frequent[1]
+            
+            # If length of left - right + 1 > frequency + k -> move left border
+            
+            if (right - left + 1 - frequency) > k:
+                letters[s[left]] -= 1
+                result = max(result, right - left)
+                left += 1
+            
+        return max(result, right-left+1)
 
 s = Solution()
 
 # input = 'AABABBA'
-input = 'ABBB'
+# input = 'ABAB'
+# input = 'ABBB'
+input = 'ABAA'
 
-print(s.characterReplacement(input, 2))
+print(s.characterReplacement(input, 0))
