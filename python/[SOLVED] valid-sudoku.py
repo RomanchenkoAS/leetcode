@@ -19,40 +19,58 @@ class Solution(object):
         # Get 3x3 pieces
 
         row = set()
-        # cols = [set() for _ in range(9)]
-        cols = [set()] * 9
-        boxes = [set()] * 9
+        cols = [set() for _ in range(9)]
+        boxes = [set() for _ in range(9)]
 
-        print(cols)
-        # print(boxes)
+        def get_box(i, j):
+            column = j // 3
+            row = i // 3
 
-        for li, line in enumerate(board):
+            return row * 3 + column
+
+        for li in range(9):
 
             # Reset list for row
             row.clear()
             for ci, cell in enumerate(board[li]):
                 # print(cell)
 
+                if cell == ".":
+                    continue
+
                 # Row
                 if cell in row:
                     return False
                 else:
                     row.add(cell)
-                    
-                # Column 
+
+                # Column
                 if cell in cols[ci]:
                     return False
                 else:
                     cols[ci].add(cell)
-                    
-                # Box
 
-            # After row is processed
+                # Box
+                box_num = get_box(li, ci)
+
+                if cell in boxes[box_num]:
+                    return False
+                else:
+                    boxes[box_num].add(cell)
+
+        return True
 
 
 s = Solution()
 
-board = [["5", "3", ".", ".", "7", ".", ".", ".", "."], ["6", ".", ".", "1", "9", "5", ".", ".", "."], [".", "9", "8", ".", ".", ".", ".", "6", "."], ["8", ".", ".", ".", "6", ".", ".", ".", "3"], ["4", ".", ".", "8",
-                                                                                                                                                                                                      ".", "3", ".", ".", "1"], ["7", ".", ".", ".", "2", ".", ".", ".", "6"], [".", "6", ".", ".", ".", ".", "2", "8", "."], [".", ".", ".", "4", "1", "9", ".", ".", "5"], [".", ".", ".", ".", "8", ".", ".", "7", "9"]]
+board = [["5", "3", ".", ".", "7", ".", ".", ".", "."],
+         ["6", ".", ".", "1", "9", "5", ".", ".", "."],
+         [".", "9", "8", ".", ".", ".", ".", "6", "."],
+         ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
+         ["4", ".", ".", "8", ".", "3", ".", ".", "1"], 
+         ["7", ".", ".", ".", "2", ".", ".", ".", "6"], 
+         [".", "6", ".", ".", ".", ".", "2", "8", "."], 
+         [".", ".", ".", "4", "1", "9", ".", ".", "5"], 
+         [".", ".", ".", ".", "8", ".", ".", "7", "9"]]
 
 print(s.isValidSudoku(board))
