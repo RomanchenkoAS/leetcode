@@ -11,31 +11,23 @@ class Solution(object):
         if not nums:
             return 0
         
-        s = set(nums)
-        
-        print(s)
+        s = sorted(list(set(nums)))
         
         max_length = 0
-        length_current = 1
+        current_length = 1
+        current = s[0]
         
-        current = min(s)
-        s.remove(current)
-        
-        print(current)
-        
-        while s:
-            if current + 1 in s:
+        for i in range(1, len(s)):
+            if s[i] == current + 1:
+                current_length += 1
                 current += 1
-                s.remove(current)
-                length_current += 1
             else:
-                max_length = max(max_length, length_current)
-                length_current = 1
-                current = min(s)
-                s.remove(current)
-                
-        return max(max_length, length_current)
+                max_length = max(current_length, max_length)
+                current_length = 1
+                current = s[i]
         
+        return max(max_length, current_length)
+            
         
 # nums = [100,4,200,1,3,2]
 # nums = [0,3,7,2,5,8,4,6,0,1]
