@@ -12,7 +12,7 @@ class Solution(object):
         
         index = len(temperatures) - 1
         stack = []
-        result = [-1 for i in range(len(temperatures))]
+        result = [0 for i in range(len(temperatures))]
         print(result)
         
         while index >= 0:
@@ -26,7 +26,8 @@ class Solution(object):
             # Check if bigger is in stack
             for i, temp in enumerate(copied):
                 if temp > current:
-                    result[index] = i
+                    result[index] = i + 1
+                    break
                 
             stack.append(current)
             
