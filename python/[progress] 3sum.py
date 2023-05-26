@@ -19,18 +19,31 @@ class Solution(object):
             l = i + 1
             r = len(nums) - 1
             
+            if i > 0 and nums[i - 1] == nums[i]:
+                continue
+             
             while l < r:
+                
+                if l > i + 1 and nums[l] == nums[l - 1]:
+                    l += 1
+                    continue
+                if r < len(nums) - 1 and nums[r] == nums[r + 1]:
+                    r -= 1
+                    continue
+                
                 if target == nums[l] + nums[r]:
                     result.append([num, nums[l], nums[r]])
-                    break
+                    l += 1
+                    r -= 1
                 elif target < nums[l] + nums[r]:
                     r -= 1
                 else:
                     l += 1
-                    
+        
         return result
     
 s = Solution()
-nums = [-1,0,1,2,-1,-4]
+# nums = [-1,0,1,2,-1,-4]
+nums = [0, 0, 0, 0]
 
 print(s.threeSum(nums=nums)) 
