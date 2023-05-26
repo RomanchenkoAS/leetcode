@@ -27,25 +27,22 @@ class Solution(object):
 
                 if target == nums[l] + nums[r]:
                     result.append([num, nums[l], nums[r]])
+
                     l += 1
-                    r -= 1
+                    while nums[l] == nums[l - 1] and l < r:
+                        l += 1
                 elif target < nums[l] + nums[r]:
                     r -= 1
 
-                    while nums[r] == nums[r + 1] and l < r:
-                        r -= 1
                 else:
                     l += 1
-
-                    while nums[l] == nums[l - 1] and l < r:
-                        l += 1
 
         return result
 
 
 s = Solution()
-# nums = [-1,0,1,2,-1,-4]
+nums = [-1,0,1,2,-1,-4]
 # nums = [0, 0, 0, 0]
-nums = [-2, 0, 0, 2, 2]
+# nums = [-2, 0, 0, 2, 2]
 
 print(s.threeSum(nums=nums))
