@@ -23,6 +23,8 @@ class Solution:
         for i in range(len(nodelist) - 1):
             node[i].next = nodelist[i + 1]
 
+        print()
+
 
 s = Solution()
 head = [1, 2, 3, 4, 5]
