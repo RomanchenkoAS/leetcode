@@ -21,10 +21,10 @@ class Solution:
 
         nodelist.reverse()
         for i in range(len(nodelist) - 1):
-            node[i].next = nodelist[i + 1]
+            nodelist[i].next = nodelist[i + 1]
 
-        print()
-
+        nodelist[0].next = None
+        return nodelist[-1]
 
 s = Solution()
 head = [1, 2, 3, 4, 5]
