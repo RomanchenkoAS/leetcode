@@ -1,60 +1,55 @@
+from typing import Optional
+
+
 # Definition for singly-linked list.
-class ListNode(object):
+class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
 
+    def print_list(self):
+        node = self
+        while node is not None:
+            if node.next:
+                print(node.val, end=" > ")
+            else:
+                print(node.val)
 
-def display_list(head):
-    print(head.val, end=" ")
-    if head.next == None:
-        print()
-        return
-    else:
-        display_list(head.next)
-
-
-class Solution(object):
-    def reverseList(self, head):
-        """
-        :type head: ListNode
-        :rtype: ListNode
-        """
-        if not head:
-            return None
-
-        node = head
-        list = [node]
-        while (node.next != None):
-            list.append(node.next)
             node = node.next
 
-        # print(list)
-        # list.reverse()
-        length = len(list) 
-        for i in range(0, length):
-            # print(i, list[i].val)
+    def take_input(self, list):
+        node = self
+        for i in range(len(list) - 1):
+            node.next = ListNode()
+            node = node.next
+        node.next = None
 
-            if i == length - 1:
-                list[i].next = None
-            else:
-                list[i].next = list[i + 1]
-
-        return list[0]
+        node = self
+        for i in list:
+            node.val = i
+            node = node.next
 
 
-l3 = ListNode(8, None)
-l2 = ListNode(5, l3)
-l1 = ListNode(1, l2)
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if head is None:
+            return None
+        if head.next is None:
+            return head
 
-sol = Solution()
+        new_list = None
+        while head:
+            new_node = head.next
+            head.next = new_list
+            new_list = head
+            head = new_node
+        return new_list
 
-print("Init: ")
 
-display_list(l1)
+s = Solution()
+head = ListNode()
+head.take_input([1, 2, 3, 4, 5])
+head.print_list()
 
-print("Solution: ")
-
-l1 = sol.reverseList(l1)
-
-display_list(l1)
+new_head = s.reverseList(head)
+new_head.print_list()
