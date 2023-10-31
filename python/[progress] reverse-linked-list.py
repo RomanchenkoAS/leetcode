@@ -7,25 +7,52 @@ class ListNode:
         self.val = val
         self.next = next
 
+    def print_list(self):
+        node = self
+        while node is not None:
+            if node.next:
+                print(node.val, end=" > ")
+            else:
+                print(node.val)
+
+            node = node.next
+
+    def take_input(self, list):
+        node = self
+        for i in range(len(list) - 1):
+            node.next = ListNode()
+            node = node.next
+        node.next = None
+
+        node = self
+        for i in list:
+            node.val = i
+            node = node.next
+
 
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        if not head:
+        if head is None:
             return None
-        if not head.next:
+        if head.next is None:
             return head
-        node = head
         nodelist = []
-        while node.next:
-            nodelist.append(node)
+        while head:
+            nodelist.append(head)
+            head = head.next
 
         nodelist.reverse()
         for i in range(len(nodelist) - 1):
             nodelist[i].next = nodelist[i + 1]
 
-        nodelist[0].next = None
-        return nodelist[-1]
+        nodelist[-1].next = None
+        return nodelist[0]
+
 
 s = Solution()
-head = [1, 2, 3, 4, 5]
-print(s.reverseList(head))
+head = ListNode()
+head.take_input([1, 2, 3, 4, 5])
+head.print_list()
+
+new_head = s.reverseList(head)
+new_head.print_list()
