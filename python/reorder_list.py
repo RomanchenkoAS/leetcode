@@ -36,9 +36,8 @@ class Solution:
         """
         Does not return anything, modifies head in-place instead.
         """
-
-        # print(f"Initial list:")
-        # head.print_list()
+        if head is None or head.next is None:
+            return
 
         # FIND THE MIDDLE BY USING FAST/SLOW ITERATORS
         center_node = self.find_middle_node(head)
@@ -47,25 +46,16 @@ class Solution:
         right = center_node.next
         center_node.next = None
 
-        # print(f"Right list:")
-        # right.print_list()
-
         right = self.reverseList(right)
-
-        # print(f"Reversed list:")
-        # right.print_list()
 
         left = head
         # COMPOSE IN RESULTING LIST
-        while (left is not None or right is not None):
+        while (left is not None and right is not None):
             tmp = right.next
             right.next = left.next
             left.next = right
             right = tmp
             left = left.next.next
-         
-        # print(f"Resulting list:")
-        # head.print_list()
 
 s = Solution()
 
