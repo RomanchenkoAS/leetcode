@@ -1,14 +1,9 @@
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
 from typing import Optional
 from lib.linked_list import ListNode
 
+
 class Solution:
-    def find_middle_node(self, head: ListNode):
-        mid = 0
+    def find_middle_node(self, head: ListNode) -> ListNode:
         slow, fast = head, head
 
         def has_next_next(node: ListNode):
@@ -18,26 +13,63 @@ class Solution:
             return False
 
         while has_next_next(fast):
-            mid += 1
             slow = slow.next
             fast = fast.next.next
 
-        return slow, mid
+        return slow
+
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if head is None:
+            return None
+        if head.next is None:
+            return head
+
+        new_list = None
+        while head:
+            new_node = head.next
+            head.next = new_list
+            new_list = head
+            head = new_node
+        return new_list
 
     def reorderList(self, head: Optional[ListNode]) -> None:
         """
-        Do not return anything, modify head in-place instead.
+        Does not return anything, modifies head in-place instead.
         """
-        
-        # FIND THE MIDDLE BY USING FAST/SLOW ITERATORS
-        # CUT OUT RIGHT PART AND REORDER IT
-        # COMPOSE IN RESULTING LIST
 
+        # print(f"Initial list:")
+        # head.print_list()
+
+        # FIND THE MIDDLE BY USING FAST/SLOW ITERATORS
+        center_node = self.find_middle_node(head)
+
+        # CUT OUT RIGHT PART AND REORDER IT
+        right = center_node.next
+        center_node.next = None
+
+        # print(f"Right list:")
+        # right.print_list()
+
+        right = self.reverseList(right)
+
+        # print(f"Reversed list:")
+        # right.print_list()
+
+        left = head
+        # COMPOSE IN RESULTING LIST
+        while (left is not None or right is not None):
+            tmp = right.next
+            right.next = left.next
+            left.next = right
+            right = tmp
+            left = left.next.next
+         
+        # print(f"Resulting list:")
+        # head.print_list()
 
 s = Solution()
 
 head = ListNode()
-head.take_input(list(range(5)))
-head.print_list()
+head.take_input(list(range(6)))
 
-s.find_middle_node(head)
+s.reorderList(head=head)
