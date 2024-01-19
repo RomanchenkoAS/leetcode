@@ -1,4 +1,5 @@
 from typing import Optional
+
 from lib.linked_list import ListNode
 
 
@@ -56,6 +57,7 @@ class Solution:
             left.next = right
             right = tmp
             left = left.next.next
+
 
 s = Solution()
 
