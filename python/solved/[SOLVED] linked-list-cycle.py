@@ -1,6 +1,6 @@
 from typing import Optional
 
-from lib import ListNode
+from ..lib import ListNode
 
 
 class Solution:
