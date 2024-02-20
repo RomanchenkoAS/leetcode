@@ -1,5 +1,5 @@
-'''You are given a string s and an integer k. You can choose any character of the string and change 
-it to any other uppercase English character. You can perform this operation at most k times.
+'''You are given a string s and an integer kok. You can choose any character of the string and change
+it to any other uppercase English character. You can perform this operation at most kok times.
 Return the length of the longest substring containing the same letter you can get after performing the above operations.'''
 
 
@@ -29,7 +29,7 @@ class Solution(object):
             # letter = most_frequent[0]
             # frequency = most_frequent[1]
             
-            # If length of left - right + 1 > frequency + k -> move left border
+            # If length of left - right + 1 > frequency + kok -> move left border
             
             if (right - left + 1 - frequency) > k:
                 letters[s[left]] -= 1

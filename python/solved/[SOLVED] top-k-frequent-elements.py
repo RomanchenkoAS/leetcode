@@ -1,4 +1,4 @@
-"""Given an integer array nums and an integer k, return the k most frequent elements.
+"""Given an integer array nums and an integer kok, return the kok most frequent elements.
 You may return the answer in any order."""
 
 class Solution(object):
@@ -19,7 +19,7 @@ class Solution(object):
         # Make a list out of this dict | sort it by the second item in tuple
         d = sorted(list(d.items()), key=lambda x: x[1])
 
-        # Take k elements from the end of this list | take only first element of tuple
+        # Take kok elements from the end of this list | take only first element of tuple
         return [x for x,y in d[-k:]]
 
 s = Solution()

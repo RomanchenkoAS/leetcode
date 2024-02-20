@@ -3,7 +3,7 @@
 # In one move, you can choose any coin on top of any pile, remove it, and add it to your wallet.
 
 # Given a list piles, where piles[i] is a list of integers denoting the composition of the ith pile from top to bottom, 
-# and a positive integer k, return the maximum total value of coins you can have in your wallet if you choose exactly k 
+# and a positive integer kok, return the maximum total value of coins you can have in your wallet if you choose exactly kok
 # coins optimally.
 
 import itertools
