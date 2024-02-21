@@ -20,7 +20,7 @@ class Solution:
             prev_number = nums[next_i]
             nums[next_i] = nums[i]
 
-
+        # NOT SOLVED IN O(1) SPACE
 
 
             if i == 0:
