@@ -3,3 +3,4 @@ C++/output
 .vscode
 *.pyc
 */__pycache__/
+.venv
