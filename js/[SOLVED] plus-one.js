@@ -3,23 +3,24 @@
  * @return {number[]}
  */
 var plusOne = function (digits) {
-    let last = digits.at(-1);
-    let last_index = digits.length - 1;
-    if (last !== 9) {
-        digits[last_index]++;
-    } else {
-        for (let i = last_index; i >= 0; i--) {
-            if (digits[i] === 9) {
-                if (i === 0) {
-                    digits[i] = 1;
-                    digits.push(0)
-                } else {
-                    digits[i] = 0;
-                }
+    let lastDigit = digits.at(-1);
+    let lastIndex = digits.length - 1;
+    if (lastDigit !== 9) {
+        digits[lastIndex]++;
+        return digits;
+    }
+
+    for (let i = lastIndex; i >= 0; i--) {
+        if (digits[i] === 9) {
+            if (i === 0) {
+                digits[i] = 1;
+                digits.push(0)
             } else {
-                digits[i]++;
-                break;
+                digits[i] = 0;
             }
+        } else {
+            digits[i]++;
+            break;
         }
     }
     return digits;

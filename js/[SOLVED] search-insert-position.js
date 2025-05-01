@@ -19,7 +19,7 @@ var searchInsert = function (nums, target) {
         if (r - 1 <= l) {
             if (target <= nums[l]) {
                 return l;
-            } else if (target > nums[l] && target <= nums[r]) {
+            } else if (target <= nums[r]) {
                 return r;
             } else {
                 return r + 1;

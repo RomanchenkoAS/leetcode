@@ -3,16 +3,17 @@
  * @return {boolean}
  */
 var isPalindrome = function (x) {
-    let x_str = x.toString();
+    const str = x.toString();
+    const mid = Math.floor(str.length / 2);
 
-    for (let i = 0; i < Math.floor(x_str.length / 2); i++) {
-        if (x_str[i] !== x_str[x_str.length - i - 1]) {
+    for (let i = 0; i < mid; i++) {
+        if (str[i] !== str[str.length - 1 - i]) {
             return false;
         }
     }
+
     return true;
 };
-
 
 console.log("Will check 123")
 a = isPalindrome(123)
