@@ -14,30 +14,24 @@ var minDepth = function (root) {
     if (!root) {
         return 0;
     }
-    if (!root.left && !root.right) {
-        return 1;
-    }
 
-    let nodesStack = [root];
-    let currentNode = null;
-    let pathLength = 0;
-    let minLength = Infinity;
+    const nodesQueue = [[root, 1]];
 
 
-    while (currentNode = nodesStack.shift()) {
-        pathLength++;
-
-        console.log(`Inspecting node ${currentNode.val} | l:${pathLength}`);
+    while (nodesQueue.length > 0) {
+        const [currentNode, currentDepth] = nodesQueue.shift();
 
         if (!currentNode.left && !currentNode.right) {
-            minLength = Math.min(minLength, pathLength);
+            return currentDepth;
         }
 
-        nodesStack.push(currentNode.left);
-        nodesStack.push(currentNode.right);
+        if (currentNode.left)
+            nodesQueue.push([currentNode.left, currentDepth + 1]);
+        if (currentNode.right)
+            nodesQueue.push([currentNode.right, currentDepth + 1]);
     }
 
-    return minLength;
+    return 0;
 };
 
 // TreeNode constructor
